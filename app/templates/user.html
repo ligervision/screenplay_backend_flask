@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- main overall flex container -->
+<div class="d-flex p-4 flex-column justify-content-center align-items-center bd-highlight mb-3">
+
+    <!-- content flex container - row split into three cols-->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>User: {{ user.username }}</h1>
+                <hr>
+                <h5>Screenplays created:</h5>
+                
+                <!-- show card for each screenplay by current user -->
+                {% for screenplay in screenplays %}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        {{ screenplay.title }}
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                        <p>{{ screenplay.logline }}</p>
+                        <footer class="blockquote-footer">{{ screenplay.author.username }} <cite title="Source Title">{{ screenplay.title }}</cite></footer>
+                        </blockquote>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

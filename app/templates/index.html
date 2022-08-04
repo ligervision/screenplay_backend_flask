@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- main overall flex container - column aligned center -->
+<div class="d-flex p-4 flex-column justify-content-center align-items-center bd-highlight mb-3">
+
+    <!-- content flex container - row split into three cols-->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+
+                <!-- Screenplay notices -->
+                <div class="card mb-3 border-primary" style="width: 18rem;">
+                    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                    <div class="card-header bg-primary text-white">
+                        Announcement
+                    </div>
+                    
+                    <div class="card-body" style="background-color: rgb(202, 224, 253);">
+                        <h5 class="card-title">{{ current_user.username }}</h5>
+                        <p class="card-text">Screenplay 1.0 is coming out Fall 2022.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+
+                <!-- Screenplay Welcome Dashboard -->
+                <div class="p-3 mb-3" style="width: 36rem; background-color: rgb(209, 249, 214);">
+                    <h1>Welcome to Screenplay, {{ current_user.username }}!</h1>
+                    {% for screenplay in screenplays %}
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            {{ screenplay.title }}
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                            <p>{{ screenplay.logline }}</p>
+                            <footer class="blockquote-footer">{{ screenplay.author.username }} <cite title="Source Title">{{ screenplay.title }}</cite></footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="col">
+                <p>
+                    One of three columns
+                </p>
+                <p>
+                    Menu buttons over here
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
