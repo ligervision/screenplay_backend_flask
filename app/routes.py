@@ -11,18 +11,6 @@ from app.models import User, Screenplay
 @login_required
 def index():
     screenplay = Screenplay.query.all()
-    # [
-    #     {
-    #         'author': {'username': 'george_lucas_1977'},
-    #         'title': 'Star Wars: A New Hope',
-    #         'logline': "A long time ago, in a galaxy far, far, away..."
-    #     },
-    #     {
-    #         'author': {'username': 'george_lucas_1977'},
-    #         'title': 'The Gate',
-    #         'logline': 'The Gate has been closed. Earth''s masses, desperate and displaced, roil in the teeming desert as the final lockout from the MON Sectopolis has doomed them to a seething, hostile remnant of the natural wonders Eden once bestowed upon Man. As chaos reigns in the natural world outside, the petty narcisissim and insidious philosophy of the elites within the bubble of Mons Sectopolis dooms this supposed "select" caste to exploit one another to harrowing levels of brutality, while the galvanized masses outside coalesce under the heroic visionary leadership of our Protagonist(s). Will our heroes find a way through ''The Gate'' and save humanity before the Sectopolis escapes to the orbit of Mars?'
-    #     }
-    # ]
     return render_template('index.html', title='Home', screenplay=screenplay)
 
 
@@ -70,16 +58,4 @@ def register():
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     screenplay = Screenplay.query.all()
-    # [
-    #     {
-    #         'author': {'username': 'george_lucas_1977'},
-    #         'title': 'Star Wars: A New Hope',
-    #         'logline': "A long time ago, in a galaxy far, far, away..."
-    #     },
-    #     {
-    #         'author': {'username': 'george_lucas_1977'},
-    #         'title': 'The Gate',
-    #         'logline': 'The Gate has been closed. Earth''s masses, desperate and displaced, roil in the teeming desert as the final lockout from the MON Sectopolis has doomed them to a seething, hostile remnant of the natural wonders Eden once bestowed upon Man. As chaos reigns in the natural world outside, the petty narcisissim and insidious philosophy of the elites within the bubble of Mons Sectopolis dooms this supposed "select" caste to exploit one another to harrowing levels of brutality, while the galvanized masses outside coalesce under the heroic visionary leadership of our Protagonist(s). Will our heroes find a way through ''The Gate'' and save humanity before the Sectopolis escapes to the orbit of Mars?'
-    #     }
-    # ]
     return render_template('user.html', user=user, screenplay=screenplay)
