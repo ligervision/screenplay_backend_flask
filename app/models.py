@@ -44,6 +44,7 @@ class Screenplay(db.Model):
     genre2 = db.Column(db.String(140))
     genre3 = db.Column(db.String(140))
     narrative_type = db.Column(db.String(255))
+    description = db.Column(db.String(8000))
     # timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
