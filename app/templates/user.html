@@ -2,34 +2,55 @@
 
 {% block content %}
 
-<!-- main overall flex container -->
+<!-- main overall flex container - column aligned center -->
 <div class="d-flex p-4 flex-column justify-content-center align-items-center bd-highlight mb-3">
 
     <!-- content flex container - row split into three cols-->
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>User: {{ user.username }}</h1>
-                <hr>
-                <h5>Screenplays created:</h5>
-                
-                <!-- show card for each screenplay by current user -->
-                {% for screenplay in screenplays %}
-                <div class="card mb-3">
-                    <div class="card-header">
-                        {{ screenplay.title }}
-                    </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                        <p>{{ screenplay.logline }}</p>
-                        <footer class="blockquote-footer">{{ screenplay.author.username }} <cite title="Source Title">{{ screenplay.title }}</cite></footer>
-                        </blockquote>
-                    </div>
-                </div>
-                {% endfor %}
 
+                <!-- Screenplay notices -->
+                <div style="width: 18rem;">
+                    &nbsp;
+                </div>
+
+            </div>
+            <div class="col">
+                <div class="p-3 mb-3" style="width: 36rem; background-color: rgb(209, 249, 214);">
+
+                    <h1>User: {{ user.username }}</h1>
+                    <hr>
+                    <p>
+                        <h5>Your screenplays:</h5>
+                    </p>
+                    
+                    <!-- show card for each screenplay by current user -->
+                    {% for screenplay in screenplay %}
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            {{ screenplay.title }}
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                            <p>{{ screenplay.logline }}</p>
+                            <footer class="blockquote-footer">{{ screenplay.author.username }} <cite title="Source Title">{{ screenplay.title }}</cite></footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col">
+                <p>
+                    One of three columns
+                </p>
+                <p>
+                    Menu buttons over here
+                </p>
             </div>
         </div>
     </div>
+
 </div>
 {% endblock %}

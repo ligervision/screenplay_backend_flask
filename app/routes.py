@@ -10,7 +10,7 @@ from app.models import User
 @app.route('/index')
 @login_required
 def index():
-    screenplays = [
+    screenplay = [
         {
             'author': {'username': 'george_lucas_1977'},
             'title': 'Star Wars: A New Hope',
@@ -22,7 +22,7 @@ def index():
             'logline': 'The Gate has been closed. Earth''s masses, desperate and displaced, roil in the teeming desert as the final lockout from the MON Sectopolis has doomed them to a seething, hostile remnant of the natural wonders Eden once bestowed upon Man. As chaos reigns in the natural world outside, the petty narcisissim and insidious philosophy of the elites within the bubble of Mons Sectopolis dooms this supposed "select" caste to exploit one another to harrowing levels of brutality, while the galvanized masses outside coalesce under the heroic visionary leadership of our Protagonist(s). Will our heroes find a way through ''The Gate'' and save humanity before the Sectopolis escapes to the orbit of Mars?'
         }
     ]
-    return render_template('index.html', title='Home', screenplays=screenplays)
+    return render_template('index.html', title='Home', screenplay=screenplay)
 
 
 @app.route('/login', methods=['GET', 'POST']) # Login view function
@@ -55,8 +55,8 @@ def register():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
-        user.set_password(form.password.data)
+        user = User(username=form.username.data, email=form.email.data, password=form.password.data)
+        # user.set_password()
         db.session.add(user)
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
@@ -68,7 +68,7 @@ def register():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    screenplays = [
+    screenplay = [
         {
             'author': {'username': 'george_lucas_1977'},
             'title': 'Star Wars: A New Hope',
@@ -80,4 +80,4 @@ def user(username):
             'logline': 'The Gate has been closed. Earth''s masses, desperate and displaced, roil in the teeming desert as the final lockout from the MON Sectopolis has doomed them to a seething, hostile remnant of the natural wonders Eden once bestowed upon Man. As chaos reigns in the natural world outside, the petty narcisissim and insidious philosophy of the elites within the bubble of Mons Sectopolis dooms this supposed "select" caste to exploit one another to harrowing levels of brutality, while the galvanized masses outside coalesce under the heroic visionary leadership of our Protagonist(s). Will our heroes find a way through ''The Gate'' and save humanity before the Sectopolis escapes to the orbit of Mars?'
         }
     ]
-    return render_template('user.html', user=user, screenplays=screenplays)
+    return render_template('user.html', user=user, screenplay=screenplay)
