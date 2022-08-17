@@ -1,6 +1,6 @@
 # from datetime import datetime
 from app import db, login
-from flask_login import UserMixin
+from flask_login import UserMixin, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy.sql import func
@@ -46,6 +46,19 @@ class Screenplay(db.Model):
     narrative_type = db.Column(db.String(255))
     description = db.Column(db.String(8000))
     # timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __init__(self, user_id, title, total_scenes, logline, dramatic_question, genre1, genre2, genre3, narrative_type, description):
+        self.user_id = user_id # THIS NEEDS TO GET CURRENT USER
+        self.title = title
+        self.total_scenes = total_scenes # THIS STARTS AT 0
+        self.logline = logline
+        self.dramatic_question = dramatic_question
+        self.genre1 = genre1
+        self.genre2 = genre2
+        self.genre3 = genre3
+        self.narrative_type = narrative_type
+        self.description = description
+        # self.password_hash = self.set_password(password)
 
     def __repr__(self):
         return '<Screenplay {}>'.format(self.title)

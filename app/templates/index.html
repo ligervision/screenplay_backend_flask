@@ -29,9 +29,17 @@
 
                 <!-- Screenplay Welcome Dashboard -->
                 <div class="p-3 mb-3" style="width: 36rem; background-color: rgb(209, 249, 214);">
-                    <h1>Welcome to Screenplay, {{ current_user.username }}!</h1>
+                    <h1>Welcome to Screenplay, 
+                        <b>
+                            <a href="{{ url_for('user', username=current_user.username) }}">
+                                {{ current_user.username }}
+                            </a>
+                        </b>
+                        !    
+                    </h1>
                     <hr>
                     
+
                     {% for screenplay in screenplay %}
                     <div class="card mb-3">
                         <div class="card-header">

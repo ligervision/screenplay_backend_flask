@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- main overall flex container - column aligned center -->
+<div class="d-flex p-4 flex-column justify-content-center align-items-center bd-highlight mb-3">
+
+    <!-- content flex container - row split into two cols-->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="p-3 mb-3" style="width: 60rem; background-color: rgb(244, 207, 22);">
+
+                    <h1>{% block title %} Edit Screenplay details for
+                    <br><b>{{ screenplay.title }}</b> {% endblock %}</h1>
+                    <hr>
+                    <p>
+                        <h5>Title is the only required field.</h5>  
+                    </p>
+                    <div class="card mb-3">
+                        <div class="card-body" style="background-color: rgb(252, 238, 177);">
+
+                            <!-- Create Screenplay form -->
+
+                            <form method="post">
+
+                                <label for="title"><h1>Title</h1></label>
+                                <br>
+                                <textarea name="title"
+                                        placeholder="{{ screenplay.title }}"
+                                        rows="1"
+                                        cols="90"
+                                        ></textarea>
+                                                                
+                                <br>
+                                <br>
+                                <label for="logline"><h1>Logline</h1></label>
+                                <br>
+                                <textarea name="logline"
+                                        placeholder="{{ screenplay.logline }}"
+                                        rows="4"
+                                        cols="90"
+                                        ></textarea>
+                                
+                                <br>
+                                <br>
+                                <label for="dramatic_question"><h1>Dramatic Question</h1></label>
+                                <br>
+                                <textarea name="dramatic_question"
+                                        placeholder="{{ screenplay.dramatic_question }}"
+                                        rows="4"
+                                        cols="90"
+                                        ></textarea>
+                                
+                                <br>
+                                <br>
+                                <h1>
+                                    Genre
+                                </h1>
+                                <br>
+                                <label for="genre1">Genre 1: &nbsp;</label>
+                                <input type="text" name="genre1"
+                                placeholder="{{ screenplay.genre1 }}">
+                                </input> &nbsp;
+                                                                
+                                <label for="genre2">Genre 2: &nbsp;</label>
+                                <input type="text" name="genre2"
+                                    placeholder="{{ screenplay.genre2 }}">
+                                </input> &nbsp;
+                    
+                            
+                                <label for="genre3">Genre 3: &nbsp;</label>
+                                <input type="text" name="genre3"
+                                    placeholder="{{ screenplay.genre3 }}">
+                                </input>
+                                                    
+                                <br>
+                                <br>
+                                <br>
+                                <h1>
+                                    Narrative Type
+                                </h1>
+                                <br>
+                                <label for="narrative_type">Narrative Type: &nbsp;</label>
+                                <select id="narrative_type" name="narrative_type">
+                                <option value="tragedy">Tragedy</option>
+                                <option value="comedy">Comedy</option>
+                                <option value="heros_journey" selected>Hero's Journey</option>
+                                <option value="rags_to_riches">Rags to Riches</option>
+                                <option value="rebirth">Rebirth</option>
+                                <option value="overcoming_the_monster">Overcoming the Monster</option>
+                                <option value="voyage_and_return">Voyage & Return</option>
+                                </select>
+                                
+                                <br>
+                                <br>
+                                <label for="description"><h1>Description</h1></label>
+                                <br>
+                                <textarea name="description"
+                                        placeholder="{{ screenplay.description }}"
+                                        rows="10"
+                                        cols="90"
+                                        ></textarea>
+                                <br>
+                                <br>
+                                <button type="submit">+ Update Screenplay +</button>
+                                </p>
+                            </form>
+                            
+                        </div>
+                    </div>    
+                </div>
+            </div>
+            <div class="col">
+                <p>
+                    Menu buttons over here
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

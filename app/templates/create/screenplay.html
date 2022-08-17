@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- main overall flex container - column aligned center -->
+<div class="d-flex p-4 flex-column justify-content-center align-items-center bd-highlight mb-3">
+
+    <!-- content flex container - row split into two cols-->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="p-3 mb-3" style="width: 60rem; background-color: rgb(244, 207, 22);">
+
+                    <h1>{% block title %} <b>Create a new Screenplay</b> {% endblock %}</h1>
+                    <hr>
+                    <p>
+                        <h5>Title is the only required field.</h5>  
+                    </p>
+                    <div class="card mb-3">
+                        <div class="card-body" style="background-color: rgb(252, 238, 177);">
+
+                            <!-- Create Screenplay form -->
+
+                            <!-- FORM NEEDS TO PROVIDE user_id AND total_scenes -->
+
+                            <form method="post">
+
+                                <label for="title"><h1>Title</h1></label>
+                                <br>
+                                <textarea name="title"
+                                        placeholder="Title"
+                                        rows="1"
+                                        cols="90"
+                                        ></textarea>
+                                                                
+                                <br>
+                                <br>
+                                <label for="logline"><h1>Logline</h1></label>
+                                <br>
+                                <textarea name="logline"
+                                        placeholder="Logline"
+                                        rows="4"
+                                        cols="90"
+                                        ></textarea>
+                                
+                                <br>
+                                <br>
+                                <label for="dramatic_question"><h1>Dramatic Question</h1></label>
+                                <br>
+                                <textarea name="dramatic_question"
+                                        placeholder="Dramatic Question"
+                                        rows="4"
+                                        cols="90"
+                                        ></textarea>
+                                
+                                <br>
+                                <br>
+                                <h1>
+                                    Genre
+                                </h1>
+                                <br>
+                                <label for="genre1">Genre 1 &nbsp;</label>
+                                <input type="text" name="genre1"
+                                placeholder="Genre 1">
+                                </input> &nbsp;
+                                                                
+                                <label for="genre2">Genre 2 &nbsp;</label>
+                                <input type="text" name="genre2"
+                                    placeholder="Genre 2">
+                                </input> &nbsp;
+                    
+                            
+                                <label for="genre3">Genre 3 &nbsp;</label>
+                                <input type="text" name="genre3"
+                                    placeholder="Genre 3">
+                                </input>
+                                                    
+                                <br>
+                                <br>
+                                <br>
+                                <h1>
+                                    Narrative Type
+                                </h1>
+                                <br>
+                                <label for="narrative_type">Narrative Type: &nbsp;</label>
+                                <select id="narrative_type" name="narrative_type">
+                                <option value="tragedy"selected>Select a Narrative Type...</option>
+                                <option value="tragedy">Tragedy</option>
+                                <option value="comedy">Comedy</option>
+                                <option value="heros_journey">Hero's Journey</option>
+                                <option value="rags_to_riches">Rags to Riches</option>
+                                <option value="rebirth">Rebirth</option>
+                                <option value="overcoming_the_monster">Overcoming the Monster</option>
+                                <option value="voyage_and_return">Voyage & Return</option>
+                                </select>
+                                <h7>
+                                    &nbsp; &nbsp;(see: <a href='https://en.wikipedia.org/wiki/The_Seven_Basic_Plots'><em>Seven Basic Plots</em></a> by Christopher Booker)
+                                </h7>
+                                <br>
+                                <br>
+                                <label for="description"><h1>Description</h1></label>
+                                <br>
+                                <textarea name="description"
+                                        placeholder="Description"
+                                        rows="10"
+                                        cols="90"
+                                        ></textarea>
+                                <br>
+                                <br>
+                                <button type="submit">+ Create Screenplay +</button>
+                                </p>
+                            </form>
+                            
+                        </div>
+                    </div>    
+                </div>
+            </div>
+            <div class="col">
+                <p>
+                    Menu buttons over here
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

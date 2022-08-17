@@ -17,30 +17,30 @@
 
             </div>
             <div class="col">
-                <div class="p-3 mb-3" style="width: 36rem; background-color: rgb(209, 249, 214);">
-                    
-                    <h1>{% block title %}User: <b>{{ user.username }}</b>{% endblock %}</h1>
+                <div class="p-3 mb-3" style="width: 36rem; background-color: rgb(252, 238, 177);">
+
+                    <h1>{% block title %}<b>{{ screenplay.title }}</b>
+                        {% endblock %}</h1>
                     <hr>
                     <p>
-                        <h5>Your screenplays:</h5>
+                        <h5>by <a href="{{ url_for('user', username=current_user.username) }}">
+                            {{ screenplay.author.username }}</a>
+                        </h5>
                     </p>
                     
-                    <!-- show card for each screenplay by current user -->
-                    {% for screenplay in screenplay %}
+                    <!-- show card for selected screenplay -->
                     <div class="card mb-3">
                         <div class="card-header">
-
-                            <!-- THIS NEEDS TO LINK TO THE SCREENPLAY -->
-                            <b><a href="#">{{ screenplay.title }}</a></b>
+                            {{ screenplay.title }}
                         </div>
                         <div class="card-body">
                             <blockquote class="blockquote mb-0">
                             <p>{{ screenplay.description }}</p>
-                            <footer class="blockquote-footer">{{ screenplay.author.username }} <cite title="Source Title">{{ screenplay.title }}</cite></footer>
+                            <!-- <footer class="blockquote-footer">{{ screenplay.author.username }} <cite title="Source Title">{{ screenplay.title }}</cite></footer> -->
                             </blockquote>
+
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
             </div>
             <div class="col">

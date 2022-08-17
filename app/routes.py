@@ -57,5 +57,81 @@ def register():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    screenplay = Screenplay.query.all()
-    return render_template('user.html', user=user, screenplay=screenplay)
+    screenplays = Screenplay.query.filter_by(user_id=current_user.id) # THIS NEEDS TO PULL ONLY THIS USER'S SCREENPLAYS
+    return render_template('user.html', user=user, screenplay=screenplays)
+
+# CREATE Screenplay
+@app.route('/create/screenplay/', methods=('GET', 'POST'))
+@login_required
+def create_screenplay():
+    # get form data
+    if request.method == 'POST':
+        title = request.form['title']
+        logline = request.form['logline']
+        dramatic_question = request.form['dramatic_question']
+        genre1 = request.form['genre1']
+        genre2 = request.form['genre2']
+        genre3 = request.form['genre3']
+        narrative_type = request.form['narrative_type']
+        description = request.form['description']
+        # Create new instance
+        new_screenplay = Screenplay(user_id=current_user.id,
+                        title=title,
+                        total_scenes=0,
+                        logline=logline,
+                        dramatic_question=dramatic_question,
+                        genre1=genre1,
+                        genre2=genre2,
+                        genre3=genre3,
+                        narrative_type=narrative_type,
+                        description=description)
+        db.session.add(new_screenplay)
+        db.session.commit()
+
+        return redirect(url_for('index')) # change to view that screenplay
+
+    return render_template('create/screenplay.html')
+
+
+# READ Screenplay
+@app.route('/screenplay/<int:screenplay_id>/') #, methods=('GET', 'POST'))
+@login_required
+def view_screenplay(screenplay_id):
+    screenplay = Screenplay.query.get_or_404(screenplay_id)
+    return render_template('screenplay/index.html', screenplay=screenplay)
+
+
+# UPDATE Screenplay
+@app.route('/screenplay/<int:screenplay_id>/edit/', methods=('GET', 'POST'))
+@login_required
+def edit_screenplay(screenplay_id):
+    screenplay = Screenplay.query.get_or_404(screenplay_id)
+
+    # get form data
+    if request.method == 'POST':
+        title = request.form['title']
+        logline = request.form['logline']
+        dramatic_question = request.form['dramatic_question']
+        genre1 = request.form['genre1']
+        genre2 = request.form['genre2']
+        genre3 = request.form['genre3']
+        narrative_type = request.form['narrative_type']
+        description = request.form['description']
+
+        # edit - change table data
+        screenplay.title = title
+        # screenplay.total_scenes = screenplay.total_scenes # Total Scenes??
+        screenplay.logline = logline
+        screenplay.dramatic_question = dramatic_question
+        screenplay.genre1 = genre1
+        screenplay.genre2 = genre2
+        screenplay.genre3 = genre3
+        screenplay.narrative_type = narrative_type
+        screenplay.description = description
+
+        db.session.add(screenplay) # HOW TO MAKE THIS ONLY CHANGE THE FIELDS THAT WERE MODIFIED...?
+        db.session.commit()
+
+        return redirect(url_for('index')) # change to view that screenplay
+
+    return render_template('screenplay/edit.html', screenplay=screenplay)
