@@ -84,7 +84,7 @@
                                     Narrative Type
                                 </h1>
                                 <br>
-                                <label for="narrative_type">Narrative Type: &nbsp;</label>
+                                <label for="narrative_type">Select Narrative Type: &nbsp;</label>
                                 <select id="narrative_type" name="narrative_type">
                                 <option value={{ screenplay.narrative_type }} selected>{{ screenplay.narrative_type }}</option>
                                 <option value="Tragedy">Tragedy</option>
@@ -105,7 +105,7 @@
                                         placeholder="{{ screenplay.description }}"
                                         rows="10"
                                         cols="90"
-                                        ></textarea>
+                                        >{{ screenplay.description }}</textarea>
                                 <br>
                                 <br>
                                 <button type="submit">+ Update Screenplay +</button>

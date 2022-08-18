@@ -5,21 +5,16 @@
 <!-- main overall flex container - column aligned center -->
 <div class="d-flex p-4 flex-column justify-content-center align-items-center bd-highlight mb-3">
 
-    <!-- content flex container - row split into three cols-->
     <div class="container">
         <div class="row">
-            <div class="col">
-
-                <!-- Screenplay notices -->
-                <div style="width: 18rem;">
-                    &nbsp;
-                </div>
-
+            <div class="col-sm">
+                &nbsp;
             </div>
-            <div class="col">
+            <div class="col-sm">
                 <div class="p-3 mb-3" style="width: 36rem; background-color: rgb(252, 238, 177);">
 
-                    <h1>{% block title %}<b>{{ screenplay.title }}</b>
+                    <h1>{% block title %} Screenplay overview:
+                        <br><b>{{ screenplay.title }}</b>
                         {% endblock %}</h1>
                     <hr>
                     <p>
@@ -43,13 +38,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <p>
-                    One of three columns
-                </p>
-                <p>
-                    Menu buttons over here
-                </p>
+            <div class="col-sm">
+                <div class="p-3 mb-3" style="width: 24rem;">
+                    <p>
+                        <!-- '/screenplay/<int:screenplay_id>/edit/' -->
+                        <a href="{{ url_for('edit_screenplay', screenplay_id=screenplay.screenplay_id) }}" class="btn btn-primary btn-lg mb-3" role="button">EDIT this Screenplay</a>
+                        <br>
+                        <button type="button" class="btn btn-secondary mb-3">DELETE this Screenplay</button>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

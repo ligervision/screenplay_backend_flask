@@ -6,20 +6,16 @@
 <div class="d-flex p-4 flex-column justify-content-center align-items-center bd-highlight mb-3">
 
     <!-- content flex container - row split into three cols-->
+
     <div class="container">
         <div class="row">
-            <div class="col">
-
-                <!-- Screenplay notices -->
-                <div style="width: 18rem;">
-                    &nbsp;
-                </div>
-
+            <div class="col-sm">
+                &nbsp;
             </div>
-            <div class="col">
+            <div class="col-sm">
                 <div class="p-3 mb-3" style="width: 36rem; background-color: rgb(209, 249, 214);">
                     
-                    <h1>{% block title %}User: <b>{{ user.username }}</b>{% endblock %}</h1>
+                    <h1>{% block title %}User Profile:<br><b>{{ user.username }}</b>{% endblock %}</h1>
                     <hr>
                     <p>
                         <h5>Your screenplays:</h5>
@@ -43,13 +39,8 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col">
-                <p>
-                    One of three columns
-                </p>
-                <p>
-                    Menu buttons over here
-                </p>
+            <div class="col-sm">
+                Menu buttons over here
             </div>
         </div>
     </div>
