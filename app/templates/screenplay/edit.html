@@ -30,7 +30,7 @@
                                         placeholder="{{ screenplay.title }}"
                                         rows="1"
                                         cols="90"
-                                        ></textarea>
+                                        >{{ screenplay.title }}</textarea>
                                                                 
                                 <br>
                                 <br>
@@ -40,7 +40,7 @@
                                         placeholder="{{ screenplay.logline }}"
                                         rows="4"
                                         cols="90"
-                                        ></textarea>
+                                        >{{ screenplay.logline }}</textarea>
                                 
                                 <br>
                                 <br>
@@ -50,7 +50,7 @@
                                         placeholder="{{ screenplay.dramatic_question }}"
                                         rows="4"
                                         cols="90"
-                                        ></textarea>
+                                        >{{ screenplay.dramatic_question }}</textarea>
                                 
                                 <br>
                                 <br>
@@ -60,18 +60,21 @@
                                 <br>
                                 <label for="genre1">Genre 1: &nbsp;</label>
                                 <input type="text" name="genre1"
+                                value={{ screenplay.genre1 }}
                                 placeholder="{{ screenplay.genre1 }}">
-                                </input> &nbsp;
-                                                                
-                                <label for="genre2">Genre 2: &nbsp;</label>
-                                <input type="text" name="genre2"
-                                    placeholder="{{ screenplay.genre2 }}">
-                                </input> &nbsp;
-                    
+                            </input> &nbsp;
                             
-                                <label for="genre3">Genre 3: &nbsp;</label>
-                                <input type="text" name="genre3"
-                                    placeholder="{{ screenplay.genre3 }}">
+                            <label for="genre2">Genre 2: &nbsp;</label>
+                            <input type="text" name="genre2"
+                                value={{ screenplay.genre2 }}
+                                placeholder="{{ screenplay.genre2 }}">
+                            </input> &nbsp;
+                            
+                            
+                            <label for="genre3">Genre 3: &nbsp;</label>
+                            <input type="text" name="genre3"
+                                value={{ screenplay.genre3 }}
+                                placeholder="{{ screenplay.genre3 }}">
                                 </input>
                                                     
                                 <br>
@@ -83,13 +86,15 @@
                                 <br>
                                 <label for="narrative_type">Narrative Type: &nbsp;</label>
                                 <select id="narrative_type" name="narrative_type">
-                                <option value="tragedy">Tragedy</option>
-                                <option value="comedy">Comedy</option>
-                                <option value="heros_journey" selected>Hero's Journey</option>
-                                <option value="rags_to_riches">Rags to Riches</option>
-                                <option value="rebirth">Rebirth</option>
-                                <option value="overcoming_the_monster">Overcoming the Monster</option>
-                                <option value="voyage_and_return">Voyage & Return</option>
+                                <option value={{ screenplay.narrative_type }} selected>{{ screenplay.narrative_type }}</option>
+                                <option value="Tragedy">Tragedy</option>
+                                <option value="Comedy">Comedy</option>
+                                <!-- THIS PLACEHOLDER NEEDS TO DEFAULT TO THE LEGACY NARRATIVE TYPE -->
+                                <option value="Hero's Journey">Hero's Journey</option>
+                                <option value="Rags to Riches">Rags to Riches</option>
+                                <option value="Rebirth">Rebirth</option>
+                                <option value="Overcoming the Monster">Overcoming the Monster</option>
+                                <option value="Voyage & Return">Voyage & Return</option>
                                 </select>
                                 
                                 <br>
