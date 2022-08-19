@@ -37,7 +37,11 @@
                         <div class="card-body">
                             <blockquote class="blockquote mb-0">
                             <p>{{ screenplay.description }}</p>
-                            <footer class="blockquote-footer">Scene Count: {{ screenplay.total_scenes }} &nbsp; &nbsp;| &nbsp; &nbsp;<cite title="Source Title">{{ screenplay.genre1 }}</cite></footer>
+                            <footer class="blockquote-footer">Scene Count: {{ screenplay.total_scenes }}
+                                <cite title="Source Title">&nbsp; &nbsp;| &nbsp; &nbsp; {{ screenplay.genre1 }} &nbsp; &nbsp;| &nbsp; &nbsp;
+                                <cite title="Source Title">{{ screenplay.genre2 }} &nbsp; &nbsp;| &nbsp; &nbsp;
+                                <cite title="Source Title">{{ screenplay.genre3 }}</cite>
+                            </footer>
                             </blockquote>
                         </div>
                     </div>
