@@ -5,17 +5,20 @@
 <!-- main overall flex container - column aligned center -->
 <div class="d-flex p-4 flex-column justify-content-center align-items-center bd-highlight mb-3">
 
-    <!-- content flex container - row split into three cols-->
-
     <div class="container">
         <div class="row">
-            <div class="col-sm">
+            <div class="col-3">
                 &nbsp;
             </div>
-            <div class="col-sm">
+            <div class="col-6">
                 <div class="p-3 mb-3" style="width: 36rem; background-color: rgb(209, 249, 214);">
-                    
-                    <h1>{% block title %}User Profile:<br><b>{{ user.username }}</b>{% endblock %}</h1>
+
+                    <h5>USER PROFILE:</h5>
+                    <h1>
+                        {% block title %} 
+                        <b>{{ user.username }}</b>
+                        {% endblock %}
+                    </h1>
                     <hr>
                     <p>
                         <h5>Your screenplays:</h5>
@@ -27,28 +30,59 @@
                         <div class="card-header">
 
                             <!-- THIS NEEDS TO LINK TO THE SCREENPLAY -->
-                            <b><a href="{{ url_for('view_screenplay', screenplay_id=screenplay.screenplay_id) }}">{{ screenplay.title }}</a></b>
+                            <h3>
+                                <b><a href="{{ url_for('view_screenplay', screenplay_id=screenplay.screenplay_id) }}">{{ screenplay.title }}</a></b>
+                            </h3>
                         </div>
                         <div class="card-body">
                             <blockquote class="blockquote mb-0">
                             <p>{{ screenplay.description }}</p>
-                            <footer class="blockquote-footer">{{ screenplay.author.username }} <cite title="Source Title">{{ screenplay.title }}</cite></footer>
+                            <footer class="blockquote-footer">Scene Count: {{ screenplay.total_scenes }} &nbsp; &nbsp;| &nbsp; &nbsp;<cite title="Source Title">{{ screenplay.genre1 }}</cite></footer>
                             </blockquote>
                         </div>
                     </div>
-                    <p>
-                        <a href="{{ url_for('edit_screenplay', screenplay_id=screenplay.screenplay_id) }}" class="btn btn-primary btn-sm mb-3" role="button">EDIT Screenplay</a>
-                        &nbsp;
-                        <button type="button" class="btn btn-secondary btn-sm mb-3">DELETE Screenplay</button>
-                    </p>
+                    <div class="container">
+                        <div class="row align-items-start">
+                            <div class="col-4">
+                                <a href="{{ url_for('edit_screenplay', screenplay_id=screenplay.screenplay_id) }}" class="btn btn-primary btn-sm mb-3" role="button">EDIT Screenplay</a>
+                            </div>
+                            <div class="col-8">
+                                <form method="POST"
+                                action="{{ url_for('delete', screenplay_id=screenplay.screenplay_id) }}">
+                                <input type="submit" value="Delete Screenplay"
+                                onclick="return confirm('Are you sure you want to delete this entry?')">
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-sm">
-                Menu buttons over here
+            <div class="col-3">
+                <div class="p-3 mb-3" style="width: 24rem;">
+                    <a href="{{ url_for('create_screenplay') }}" class="btn btn-warning btn-lg mb-3" role="button">+ New Screenplay +</a>
+                    <br>
+                    <div class="btn-group-vertical" role="group" aria-label="Button group with nested dropdown">
+                        <a href="#link" class="btn btn-secondary btn-lg" role="button">+ New Scene +</a>
+                        <a href="#link" class="btn btn-secondary btn-lg" role="button">+ New Character +</a>
+                    </div>
+                    <!-- DROPDOWN MENU
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item" href="#">Dropdown link</a>
+                            <a class="dropdown-item" href="#">Dropdown link</a>
+                        </div>
+                    </div> -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
 </div>
+
 {% endblock %}

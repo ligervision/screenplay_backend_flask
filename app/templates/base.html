@@ -21,17 +21,12 @@
     <!-- Navbar Goes Here -->
     {% include 'nav.html' %}
 
-    <!-- flash messaging -->
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
+    <!-- If there is an alert message, display here in container -->
+    <div style="width: 40%; margin: auto;">
+        {% include 'messages.html' %}
+    </div>
 
+    <!-- Placeholder block for the main content of the page -->
     {% block content %}
     {% endblock %}
 

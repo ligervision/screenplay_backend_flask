@@ -7,49 +7,126 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm">
-                &nbsp;
+            <div class="col-3 p-3">
+                <p>
+                    <strong>Hero's Journey</strong>
+                </p>
+                <ul style="list-style-type:none">
+                    <li>
+                        The Ordinary World
+                    </li>
+                    <li>
+                        Call to Adventure
+                    </li>
+                    <li>
+                        Refusal of the Call
+                    </li>
+                    <li>
+                        Crossing the Threshold
+                    </li>
+                    <li>
+                        Tests, Allies, & Enemies
+                    </li>
+                    <li>
+                        The Approach
+                    </li>
+                    <li>
+                        The Ordeal
+                    </li>
+                    <li>
+                        The Reward
+                    </li>
+                    <li>
+                        The Road Back
+                    </li>
+                    <li>
+                        The Resurrection
+                    </li>
+                    <li>
+                        The Return
+                    </li>    
+                </ul>
+               
             </div>
-            <div class="col-sm">
+            <div class="col-6">
                 <div class="p-3 mb-3" style="width: 36rem; background-color: rgb(252, 238, 177);">
 
-                    <h1>{% block title %} Screenplay overview:
-                        <br><b>{{ screenplay.title }}</b>
-                        {% endblock %}</h1>
+                    <h5>SCREENPLAY OVERVIEW:</h5>
+                    <h1>
+                        {% block title %} 
+                        <b>{{ screenplay.title }}</b>
+                        {% endblock %}
+                    </h1>
                     <hr>
                     <p>
                         <h5>by <a href="{{ url_for('user', username=current_user.username) }}">
                             {{ screenplay.author.username }}</a>
                         </h5>
                     </p>
-                    
+                    <div class="container">
+                        <div class="container d-flex align-items-center justify-content-center mb-3">
+                            <div class="col text-center">
+                                <a href="{{ url_for('edit_screenplay', screenplay_id=screenplay.screenplay_id) }}" class="btn btn-primary btn-sm" role="button">EDIT Screenplay</a>
+                            </div>
+                            <div class="col text-center">
+                                <form method="POST"
+                                action="{{ url_for('delete', screenplay_id=screenplay.screenplay_id) }}">
+                                <input type="submit" value="DELETE Screenplay"
+                                onclick="return confirm('Are you sure you want to delete this entry?')">
+                            </form>
+                            </div>
+                        </div>
+                        <p style="text-align:center">
+                            {{ screenplay.genre1 }} &nbsp; &nbsp; | &nbsp; &nbsp; {{ screenplay.genre2 }} &nbsp; &nbsp; | &nbsp; &nbsp; {{ screenplay.genre3 }}
+                        </p>
+                    </div>
                     <!-- show card for selected screenplay -->
                     <div class="card mb-3">
                         <div class="card-header">
-                            {{ screenplay.title }}
+                            <strong>LOGLINE</strong>
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                            <p>{{ screenplay.logline }}</p>
+                            <!-- <footer class="blockquote-footer">Scene Count: {{ screenplay.total_scenes }} &nbsp; &nbsp;| &nbsp; &nbsp;<cite title="Source Title">{{ screenplay.genre1 }}</cite></footer> -->
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <strong>DRAMATIC QUESTION</strong>
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                            <p>{{ screenplay.dramatic_question }}</p>
+                            <!-- <footer class="blockquote-footer">Scene Count: {{ screenplay.total_scenes }} &nbsp; &nbsp;| &nbsp; &nbsp;<cite title="Source Title">{{ screenplay.genre1 }}</cite></footer> -->
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <strong>DESCRIPTION</strong>
                         </div>
                         <div class="card-body">
                             <blockquote class="blockquote mb-0">
                             <p>{{ screenplay.description }}</p>
-                            <!-- <footer class="blockquote-footer">{{ screenplay.author.username }} <cite title="Source Title">{{ screenplay.title }}</cite></footer> -->
+                            <!-- <footer class="blockquote-footer">Scene Count: {{ screenplay.total_scenes }} &nbsp; &nbsp;| &nbsp; &nbsp;<cite title="Source Title">{{ screenplay.genre1 }}</cite></footer> -->
                             </blockquote>
-
                         </div>
                     </div>
+                    
                 </div>
             </div>
-            <div class="col-sm">
-                <div class="p-3 mb-3" style="width: 24rem;">
-                    <p>
-                        <!-- '/screenplay/<int:screenplay_id>/edit/' -->
-                        <a href="{{ url_for('edit_screenplay', screenplay_id=screenplay.screenplay_id) }}" class="btn btn-primary btn-lg mb-3" role="button">EDIT this Screenplay</a>
-                        <br>
-                        <button type="button" class="btn btn-secondary mb-3">DELETE this Screenplay</button>
-                    </p>
+            <div class="col-3">
+                <div class="p-3" style="width: 24rem;">
+                    <!-- <a href="{{ url_for('edit_screenplay', screenplay_id=screenplay.screenplay_id) }}" class="btn btn-primary btn-lg mb-3" role="button">EDIT this Screenplay</a>
+                    <br>
+                    <button type="button" class="btn btn-secondary mb-3">DELETE this Screenplay</button>
+                    <br> -->
+                    <button type="button" class="btn btn-success btn-lg mb-3">VIEW SCENES</button>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 {% endblock %}

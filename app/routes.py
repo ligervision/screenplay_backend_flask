@@ -28,6 +28,7 @@ def login():
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('index')
+        flash(f"Welcome back, {user.username}!", "primary")
         return redirect(next_page)
     return render_template('login.html', title='Log In', form=form)
 
@@ -35,6 +36,7 @@ def login():
 @app.route('/logout')
 def logout():
     logout_user()
+    flash('You have logged out of Screenplay', 'secondary')
     return redirect(url_for('index'))
 
     
@@ -45,10 +47,9 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data, password=form.password.data)
-        # user.set_password()
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user!')
+        flash(f'{user.username} has successfully registered!', 'success')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
@@ -59,6 +60,7 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     screenplays = Screenplay.query.filter_by(user_id=current_user.id) # THIS NEEDS TO PULL ONLY THIS USER'S SCREENPLAYS
     return render_template('user.html', user=user, screenplay=screenplays)
+
 
 # CREATE Screenplay
 @app.route('/create/screenplay/', methods=('GET', 'POST'))
@@ -87,7 +89,7 @@ def create_screenplay():
                         description=description)
         db.session.add(new_screenplay)
         db.session.commit()
-
+        flash(f'You have started a new screenplay, {new_screenplay.title}!', 'success')
         return redirect(url_for('index')) # change to view that screenplay
 
     return render_template('create/screenplay.html')
@@ -120,7 +122,6 @@ def edit_screenplay(screenplay_id):
 
         # edit - change table data
         screenplay.title = title
-        # screenplay.total_scenes = screenplay.total_scenes # Total Scenes??
         screenplay.logline = logline
         screenplay.dramatic_question = dramatic_question
         screenplay.genre1 = genre1
@@ -129,9 +130,23 @@ def edit_screenplay(screenplay_id):
         screenplay.narrative_type = narrative_type
         screenplay.description = description
 
-        db.session.add(screenplay) # HOW TO MAKE THIS ONLY CHANGE THE FIELDS THAT WERE MODIFIED...?
+        db.session.add(screenplay)
         db.session.commit()
-
-        return redirect(url_for('index')) # change to view that screenplay
+        flash(f'{screenplay.title} has been updated!', 'success')
+        return redirect(url_for('index')) # change to REDIRECT to that screenplay
 
     return render_template('screenplay/edit.html', screenplay=screenplay)
+
+
+# DELETE Screenplay
+@app.post('/<int:screenplay_id>/delete/')
+@login_required
+def delete(screenplay_id):
+    screenplay = Screenplay.query.get_or_404(screenplay_id)
+    db.session.delete(screenplay)
+    db.session.commit()
+    flash(f'{screenplay.title} has been deleted.', 'secondary')
+    return redirect(url_for('index')) # change to REDIRECT that user's profile
+
+# "{{ url_for('user', username=current_user.username) }}"
+# href="{{ url_for('user', username=current_user.username) }}"
