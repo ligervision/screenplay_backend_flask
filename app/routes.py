@@ -58,7 +58,7 @@ def register():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    screenplays = Screenplay.query.filter_by(user_id=current_user.id) # THIS NEEDS TO PULL ONLY THIS USER'S SCREENPLAYS
+    screenplays = Screenplay.query.filter_by(user_id=current_user.id).order_by(Screenplay.screenplay_id.desc())
     return render_template('user.html', user=user, screenplay=screenplays)
 
 
@@ -90,13 +90,12 @@ def create_screenplay():
         db.session.add(new_screenplay)
         db.session.commit()
         flash(f'You have started a new screenplay, {new_screenplay.title}!', 'success')
-        return redirect(url_for('index')) # change to view that screenplay
-
+        return redirect(url_for('view_screenplay', screenplay_id=new_screenplay.screenplay_id))
     return render_template('create/screenplay.html')
 
 
 # READ Screenplay
-@app.route('/screenplay/<int:screenplay_id>/') #, methods=('GET', 'POST'))
+@app.route('/screenplay/<int:screenplay_id>/')
 @login_required
 def view_screenplay(screenplay_id):
     screenplay = Screenplay.query.get_or_404(screenplay_id)
@@ -133,7 +132,7 @@ def edit_screenplay(screenplay_id):
         db.session.add(screenplay)
         db.session.commit()
         flash(f'{screenplay.title} has been updated!', 'success')
-        return redirect(url_for('index')) # change to REDIRECT to that screenplay
+        return redirect(url_for('view_screenplay', screenplay_id=screenplay.screenplay_id))
 
     return render_template('screenplay/edit.html', screenplay=screenplay)
 
@@ -146,7 +145,4 @@ def delete(screenplay_id):
     db.session.delete(screenplay)
     db.session.commit()
     flash(f'{screenplay.title} has been deleted.', 'secondary')
-    return redirect(url_for('index')) # change to REDIRECT that user's profile
-
-# "{{ url_for('user', username=current_user.username) }}"
-# href="{{ url_for('user', username=current_user.username) }}"
+    return redirect(url_for('user', username=current_user.username)) # change to REDIRECT that user's profile

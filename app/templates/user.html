@@ -24,6 +24,7 @@
                         <h5>Your screenplays:</h5>
                     </p>
                     
+                    <!-- THIS NEEDS TO SORT IN DESCENDING ORDER BY SCREENPLAY_ID: -->
                     <!-- show card for each screenplay by current user -->
                     {% for screenplay in screenplay %}
                     <div class="card mb-3">
@@ -66,11 +67,11 @@
             <div class="col-3">
                 <div class="p-3 mb-3" style="width: 24rem;">
                     <a href="{{ url_for('create_screenplay') }}" class="btn btn-warning btn-lg mb-3" role="button">+ New Screenplay +</a>
-                    <br>
+                    <!-- <br>
                     <div class="btn-group-vertical" role="group" aria-label="Button group with nested dropdown">
                         <a href="#link" class="btn btn-secondary btn-lg" role="button">+ New Scene +</a>
                         <a href="#link" class="btn btn-secondary btn-lg" role="button">+ New Character +</a>
-                    </div>
+                    </div> -->
                     <!-- DROPDOWN MENU
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -81,7 +82,6 @@
                             <a class="dropdown-item" href="#">Dropdown link</a>
                         </div>
                     </div> -->
-                    </div>
                 </div>
             </div>
         </div>
