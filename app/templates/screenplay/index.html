@@ -58,7 +58,7 @@
                         <div>
                             <!-- BUTTONS -->
                             <div class="d-flex flex-row-reverse">
-                                <div class="p-2">
+                                <div class="px-2">
                                     <!-- DELETE BUTTON -->
                                     <form method="POST" action="{{ url_for('delete', screenplay_id=screenplay.screenplay_id) }}">
                                         <div>
@@ -66,7 +66,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="p-2">
+                                <div class="px-2">
                                     <!-- EDIT BUTTON -->
                                     <a href="{{ url_for('edit_screenplay', screenplay_id=screenplay.screenplay_id) }}">
                                         <image src="{{url_for('static',filename = 'icon_edit.gif')}}" height="25"></image>
