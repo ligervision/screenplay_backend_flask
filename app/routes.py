@@ -89,7 +89,7 @@ def create_screenplay():
                         description=description)
         db.session.add(new_screenplay)
         db.session.commit()
-        flash(f'You have started a new screenplay, {new_screenplay.title}!', 'success')
+        flash(f"You have started a new screenplay, '{new_screenplay.title}'!", 'success')
         return redirect(url_for('view_screenplay', screenplay_id=new_screenplay.screenplay_id))
     return render_template('create/screenplay.html')
 
@@ -131,7 +131,7 @@ def edit_screenplay(screenplay_id):
 
         db.session.add(screenplay)
         db.session.commit()
-        flash(f'{screenplay.title} has been updated!', 'success')
+        flash(f"'{screenplay.title}' has been updated!", 'success')
         return redirect(url_for('view_screenplay', screenplay_id=screenplay.screenplay_id))
 
     return render_template('screenplay/edit.html', screenplay=screenplay)
@@ -144,5 +144,5 @@ def delete(screenplay_id):
     screenplay = Screenplay.query.get_or_404(screenplay_id)
     db.session.delete(screenplay)
     db.session.commit()
-    flash(f'{screenplay.title} has been deleted.', 'secondary')
+    flash(f"'{screenplay.title}' has been deleted.", 'secondary')
     return redirect(url_for('user', username=current_user.username)) # change to REDIRECT that user's profile
