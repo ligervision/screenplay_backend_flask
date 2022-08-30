@@ -2,60 +2,53 @@
 
 {% block content %}
 
-<!-- main overall flex container - column aligned center -->
-<div class="d-flex p-4 flex-column justify-content-center align-items-center bd-highlight mb-3">
 
-    <div class="container">
-        <div class="row">
-            <div class="col-3">
-                <!-- Screenplay notices -->
-                <div class="card mb-3 border-primary" style="width: 17rem;">
-                    <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
-                    <div class="card-header bg-primary text-white">
-                        Announcement
-                    </div>
-                    <div class="card-body" style="background-color: rgb(202, 224, 253);">
-                        <h5 class="card-title">{{ current_user.username }}</h5>
-                        <p class="card-text">Screenplay 1.0 is coming out Fall 2022.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
+<div class="container d-flex w-100">
+    <div class="col">
+        <!-- Screenplay Welcome Dashboard -->
+        <div class="p-3 mb-3" style="width: 36rem; background-color: rgb(209, 249, 214);">
+            <h1>Welcome to Screenplay, 
+                <b>
+                    <a href="{{ url_for('user', username=current_user.username) }}">
+                        {{ current_user.username }}
+                    </a>
+                </b>
+                !    
+            </h1>
+            <hr>
+            
+            <!-- THIS NEEDS TO SORT IN DESCENDING ORDER BY SCREENPLAY_ID: -->
+            {% for screenplay in screenplay %}
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h3>
+                        <strong>{{ screenplay.title }}</strong>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                    <p>{{ screenplay.description }}</p>
+                    <footer class="blockquote-footer">{{ screenplay.author.username }}</footer>
+                    </blockquote>
                 </div>
             </div>
-            <div class="col-6">
-                <!-- Screenplay Welcome Dashboard -->
-                <div class="p-3 mb-3" style="width: 36rem; background-color: rgb(209, 249, 214);">
-                    <h1>Welcome to Screenplay, 
-                        <b>
-                            <a href="{{ url_for('user', username=current_user.username) }}">
-                                {{ current_user.username }}
-                            </a>
-                        </b>
-                        !    
-                    </h1>
-                    <hr>
-                    
-                    <!-- THIS NEEDS TO SORT IN DESCENDING ORDER BY SCREENPLAY_ID: -->
-                    {% for screenplay in screenplay %}
-                    <div class="card mb-3">
-                        <div class="card-header">
-                            <h3>
-                                <strong>{{ screenplay.title }}</strong>
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <blockquote class="blockquote mb-0">
-                            <p>{{ screenplay.description }}</p>
-                            <footer class="blockquote-footer">{{ screenplay.author.username }}</footer>
-                            </blockquote>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col">
+        <div class="p-3 mb-3" style="width: 24rem;">
+            <a href="{{ url_for('create_screenplay') }}" class="btn btn-warning btn-lg mb-3" role="button">+ New Screenplay +</a>
+        </div>
+        <!-- Screenplay notices -->
+        <div class="card mb-3 border-primary" style="width: 18rem;">
+            <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+            <div class="card-header bg-primary text-white">
+                Announcement
             </div>
-            <div class="col-3">
-                <div class="p-3 mb-3" style="width: 24rem;">
-                    <a href="{{ url_for('create_screenplay') }}" class="btn btn-warning btn-lg mb-3" role="button">+ New Screenplay +</a>
-                </div>
+            <div class="card-body" style="background-color: rgb(202, 224, 253);">
+                <h5 class="card-title">{{ current_user.username }}</h5>
+                <p class="card-text">Screenplay 1.0 is coming out Fall 2022.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
     </div>

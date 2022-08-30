@@ -3,10 +3,11 @@ from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.urls import url_parse
 from app import app, db
 from app.forms import LoginForm, RegistrationForm
-from app.models import User, Screenplay
+from app.models import User, Screenplay, Scene
 
 
-@app.route('/') # Home view function
+# HOME
+@app.route('/')
 @app.route('/index')
 @login_required
 def index():
@@ -14,7 +15,8 @@ def index():
     return render_template('index.html', title='Home', screenplay=screenplay)
 
 
-@app.route('/login', methods=['GET', 'POST']) # Login view function
+# LOGIN
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
@@ -33,13 +35,15 @@ def login():
     return render_template('login.html', title='Log In', form=form)
 
 
+# LOGOUT
 @app.route('/logout')
 def logout():
     logout_user()
     flash('You have logged out of Screenplay', 'secondary')
     return redirect(url_for('index'))
 
-    
+
+# REGISTER
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -54,6 +58,7 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 
+# VIEW USER
 @app.route('/user/<username>')
 @login_required
 def user(username):
@@ -99,7 +104,8 @@ def create_screenplay():
 @login_required
 def view_screenplay(screenplay_id):
     screenplay = Screenplay.query.get_or_404(screenplay_id)
-    return render_template('screenplay/index.html', screenplay=screenplay)
+    scenes = Scene.query.filter_by(screenplay_id=screenplay.screenplay_id).order_by(Scene.scene_sequence)
+    return render_template('screenplay/index.html', screenplay=screenplay, scene=scenes)
 
 
 # UPDATE Screenplay
@@ -138,11 +144,49 @@ def edit_screenplay(screenplay_id):
 
 
 # DELETE Screenplay
-@app.post('/<int:screenplay_id>/delete/')
+@app.post('/screenplay/<int:screenplay_id>/delete/')
 @login_required
-def delete(screenplay_id):
+def delete_screenplay(screenplay_id):
     screenplay = Screenplay.query.get_or_404(screenplay_id)
     db.session.delete(screenplay)
     db.session.commit()
     flash(f"'{screenplay.title}' has been deleted.", 'secondary')
-    return redirect(url_for('user', username=current_user.username)) # change to REDIRECT that user's profile
+    return redirect(url_for('user', username=current_user.username))
+
+
+# CREATE Scene
+@app.route('/screenplay/<int:screenplay_id>/create/scene/', methods=('GET', 'POST'))
+@login_required
+def create_scene(screenplay_id):
+
+    # get form data
+    if request.method == 'POST':
+        slugline = request.form['slugline']
+        content = request.form['content']
+        description = request.form['description']
+        plot_section = request.form['plot_section']
+
+        # Create new instance
+        new_scene = Scene(screenplay_id=screenplay_id,
+                        slugline=slugline,
+                        content=content,
+                        description=description,
+                        plot_section=plot_section)
+        db.session.add(new_scene)
+        db.session.commit()
+        flash(f"You have created a new scene: '{new_scene.slugline}'!", 'success')
+        return redirect(url_for('view_scene', scene_id=new_scene.scene_id))
+    return render_template('create/scene.html', screenplay_id=screenplay_id)
+
+
+# READ Scene
+@app.route('/scene/<int:scene_id>/')
+@login_required
+def view_scene(scene_id):
+    scene = Scene.query.get_or_404(scene_id)
+    screenplay = Screenplay.query.get_or_404(scene.screenplay_id)
+    return render_template('scene/index.html', screenplay=screenplay, scene=scene)
+
+# UDPATE Scene
+
+# DELETE Scene

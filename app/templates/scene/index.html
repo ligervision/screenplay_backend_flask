@@ -11,7 +11,7 @@
         </div>
         <div class="col">
             <div class="p-3" style="width: 36rem;">
-
+                
                 <!-- BUTTONS -->
                 <a href="{{ url_for('create_scene', screenplay_id=screenplay.screenplay_id) }}" class="btn btn-warning btn-lg mb-3" role="button">+ New Scene +</a>
                 <h6>
@@ -19,14 +19,13 @@
                 </h6>
 
                 <!-- show card for each scene in this screenplay -->
-                {% for scene in scene %}
+
                 <div class="card mb-3">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
                             <div>
                                 <h5>
-                                    <b><a href="{{ url_for('view_scene', scene_id=scene.scene_id) }}">
-                                        {{ scene.slugline }}</a></b>
+                                    <b>{{ scene.slugline }}</b>
                                 </h5>
                             </div>
                             <div>
@@ -57,7 +56,6 @@
                     </div>
                 </div>
                 <br>
-                {% endfor %}
 
             </div>
         </div>
