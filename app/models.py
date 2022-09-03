@@ -74,6 +74,8 @@ class Scene(db.Model):
     plot_section = db.Column(db.String(140))
 
     def __init__(self, screenplay_id, scene_index, scene_sequence, slugline, content, description, plot_section):
+
+        self.scene_id = 129
         self.screenplay_id = screenplay_id
         self.scene_index = scene_index
         self.scene_sequence = scene_sequence

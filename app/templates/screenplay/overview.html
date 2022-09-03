@@ -26,7 +26,8 @@
     </div>
     <h1>
         {% block title %} 
-        <b>{{ screenplay.title }}</b>
+        <a href="{{ url_for('view_screenplay', screenplay_id=screenplay.screenplay_id) }}">
+            <b>{{ screenplay.title }}</b></a>
         {% endblock %}
     </h1>
     <p>

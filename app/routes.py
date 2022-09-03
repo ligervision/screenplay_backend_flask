@@ -81,7 +81,7 @@ def create_screenplay():
         genre3 = request.form['genre3']
         narrative_type = request.form['narrative_type']
         description = request.form['description']
-        # Create new instance
+        # create new instance
         new_screenplay = Screenplay(user_id=current_user.id,
                         title=title,
                         total_scenes=0,
@@ -158,25 +158,28 @@ def delete_screenplay(screenplay_id):
 @app.route('/screenplay/<int:screenplay_id>/create/scene/', methods=('GET', 'POST'))
 @login_required
 def create_scene(screenplay_id):
+    current_screenplay = Screenplay.query.get_or_404(screenplay_id)
+    last_scene_created = Scene.query.filter_by(screenplay_id=current_screenplay.screenplay_id).order_by(Scene.scene_sequence.desc()).first()
+    new_scene_sequence = last_scene_created.scene_sequence + 1
 
     # get form data
     if request.method == 'POST':
         slugline = request.form['slugline']
         content = request.form['content']
         description = request.form['description']
-        plot_section = request.form['plot_section']
-
         # Create new instance
         new_scene = Scene(screenplay_id=screenplay_id,
+                        scene_index=new_scene_sequence,
+                        scene_sequence=new_scene_sequence,
                         slugline=slugline,
                         content=content,
                         description=description,
-                        plot_section=plot_section)
+                        plot_section='#')
         db.session.add(new_scene)
         db.session.commit()
         flash(f"You have created a new scene: '{new_scene.slugline}'!", 'success')
         return redirect(url_for('view_scene', scene_id=new_scene.scene_id))
-    return render_template('create/scene.html', screenplay_id=screenplay_id)
+    return render_template('create/scene.html', screenplay=current_screenplay)
 
 
 # READ Scene
@@ -187,6 +190,39 @@ def view_scene(scene_id):
     screenplay = Screenplay.query.get_or_404(scene.screenplay_id)
     return render_template('scene/index.html', screenplay=screenplay, scene=scene)
 
-# UDPATE Scene
 
+# UDPATE Scene
+@app.route('/scene/<int:scene_id>/edit/', methods=('GET', 'POST'))
+@login_required
+def edit_scene(scene_id):
+    scene = Scene.query.get_or_404(scene_id)
+    screenplay_id = scene.screenplay_id
+    current_screenplay = Screenplay.query.get_or_404(screenplay_id)
+
+    # get form data
+    if request.method == 'POST':
+        slugline = request.form['slugline']
+        content = request.form['content']
+        description = request.form['description']
+
+        # edit - change table data
+        scene.slugline = slugline
+        scene.content = content
+        scene.description = description
+
+        db.session.add(scene)
+        db.session.commit()
+        flash(f"'{scene.slugline}' has been updated!", 'success')
+        return redirect(url_for('view_scene', scene_id=scene.scene_id))
+    return render_template('scene/edit.html', scene=scene, screenplay=current_screenplay)
+    
+    
 # DELETE Scene
+@app.post('/scene/<int:scene_id>/delete/')
+@login_required
+def delete_scene(scene_id):
+    scene = Scene.query.get_or_404(scene_id)
+    db.session.delete(scene)
+    db.session.commit()
+    flash(f"'{scene.slugline}' has been deleted.", 'secondary')
+    return redirect(url_for('view_screenplay', screenplay_id=scene.screenplay_id))

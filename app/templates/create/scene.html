@@ -1,3 +1,62 @@
-<html>
-    <p>{{ screenplay_id }}</p>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- main overall flex container - column aligned center -->
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="p-3 mb-3" style="width: 60rem; background-color: rgb(244, 207, 22);">
+
+        <h1>{% block title %} <b>Create a new Scene</b> {% endblock %}</h1>
+        <h5>
+            <b><a href="{{ url_for('view_screenplay', screenplay_id=screenplay.screenplay_id) }}">{{ screenplay.title }}</a></b>
+        </h5>
+        <hr>
+        <h5>
+            <p>
+                Slugline is the only required field.
+            </p>
+        </h5>
+        <div class="card mb-3">
+            <div class="card-body" style="background-color: rgb(252, 238, 177);">
+
+                <!-- Create Scene form -->
+                <form method="post">
+
+                    <label for="slugline"><h1>Slugline</h1></label>
+                    <br>
+                    <textarea name="slugline"
+                            placeholder="explain Slugline"
+                            rows="1"
+                            cols="90"
+                            ></textarea>
+                                                    
+                    <br>
+                    <br>
+                    <label for="content"><h1>Content</h1></label>
+                    <br>
+                    <textarea name="content"
+                            placeholder="Type scene here"
+                            rows="10"
+                            cols="90"
+                            ></textarea>
+                    
+                    <br>
+                    <br>
+                    <label for="description"><h1>Description</h1></label>
+                    <br>
+                    <textarea name="description"
+                            placeholder="Description"
+                            rows="6"
+                            cols="90"
+                            ></textarea>
+                    <br>
+                    <br>
+                    <button type="submit">+ Create Scene +</button>
+                    </p>
+                </form>
+                
+            </div>
+        </div>    
+    </div>
+    
+{% endblock %}
