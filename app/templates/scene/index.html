@@ -25,11 +25,21 @@
                         <a href="{{ url_for('preview_screenplay', screenplay_id=screenplay.screenplay_id) }}" class="btn btn-success btn-lg mb-3" role="button">Preview Entire Screenplay</a>
                     </div>
                 </div>
+                <hr>
 
+                <!-- NAV ARROWS (LEFT & RIGHT) -->
+                <div class="d-flex justify-content-between my-3">
+                
+                    <!-- PREVIOUS SCENE -->
+                    <div>
+                        <a href="{{ url_for('view_scene', scene_id=((scene.scene_id) - 1)) }}" class="btn btn-light btn-lg mb-3" role="button"><</a>
+                    </div>
 
-                <!-- <h6>
-                    <button type="button" class="btn btn-success btn-lg mb-3">VIEW SCENES</button>&nbsp; &nbsp; View Scenes __ thru __ (10 scenes max.)
-                </h6> -->
+                    <!-- NEXT SCENE -->
+                    <div>
+                        <a href="{{ url_for('view_scene', scene_id=((scene.scene_id) + 1)) }}" class="btn btn-light btn-lg mb-3" role="button">></a>
+                    </div>
+                </div>
 
 
                 <!-- show card for each scene in this screenplay -->
