@@ -226,3 +226,12 @@ def delete_scene(scene_id):
     db.session.commit()
     flash(f"'{scene.slugline}' has been deleted.", 'secondary')
     return redirect(url_for('view_screenplay', screenplay_id=scene.screenplay_id))
+
+
+# PREVIEW ENTIRE SCREENPLAY
+@app.route('/screenplay/<int:screenplay_id>/preview/')
+@login_required
+def preview_screenplay(screenplay_id):
+    screenplay = Screenplay.query.get_or_404(screenplay_id)
+    scenes = Scene.query.filter_by(screenplay_id=screenplay.screenplay_id).order_by(Scene.scene_sequence)
+    return render_template('screenplay/preview.html', screenplay=screenplay, scene=scenes)

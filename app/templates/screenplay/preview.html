@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- main overall flex container - column aligned center -->
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="p-3 mb-3" style="width: 60rem;">
+
+        <div class="d-flex justify-content-center align-items-center">
+            <p>
+                <h3>
+                    <br>
+                    <b><a href="{{ url_for('view_screenplay', screenplay_id=screenplay.screenplay_id) }}">{{ screenplay.title }}</a></b>
+                    <br><br>
+                </h3>
+            </p>
+        </div>
+
+        <!-- show card for each scene in this screenplay -->
+        {% for scene in scene %}
+        <div class="card mb-3">
+            <div class="card-header">
+                <div>
+                    <h5>
+                        <b><a href="{{ url_for('view_scene', scene_id=scene.scene_id) }}">
+                            {{ scene.slugline }}</a></b>
+                    </h5>
+                </div>                         
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p>{{ scene.content }}</p>
+                </blockquote>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+        
+    </div>
+</div>
+
+{% endblock %}
