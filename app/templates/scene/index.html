@@ -22,7 +22,7 @@
 
                     <!-- PREVIEW ENTIRE SCREENPLAY -->
                     <div>
-                        <a href="{{ url_for('create_scene', screenplay_id=screenplay.screenplay_id) }}" class="btn btn-success btn-lg mb-3" role="button">Preview Entire Screenplay</a>
+                        <a href="{{ url_for('preview_screenplay', screenplay_id=screenplay.screenplay_id) }}" class="btn btn-success btn-lg mb-3" role="button">Preview Entire Screenplay</a>
                     </div>
                 </div>
 
@@ -36,16 +36,16 @@
 
                 <div class="card mb-3">
                     <div class="card-header">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <h5>
-                                    <b>{{ scene.slugline }}</b>
+                                    <b>{{ scene.scene_sequence }} &nbsp; {{ scene.slugline }}</b>
                                 </h5>
                             </div>
                             <div>
                                 <!-- BUTTONS -->
                                 <div class="d-flex flex-row-reverse">
-                                    <div class="p-2">
+                                    <div>
                                         <!-- DELETE BUTTON -->
                                         <form method="POST" action="{{ url_for('delete_scene', scene_id=scene.scene_id) }}">
                                             <div>
@@ -53,7 +53,7 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="p-2">
+                                    <div class="mx-3">
                                         <!-- EDIT BUTTON -->
                                         <a href="{{ url_for('edit_scene', scene_id=scene.scene_id, screenplay_id=scene.screenplay_id) }}">
                                             <image src="{{url_for('static',filename = 'icon_edit.gif')}}" height="25"></image>
