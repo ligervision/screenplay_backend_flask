@@ -12,6 +12,7 @@ from app.models import User, Screenplay, Scene
 @login_required
 def index():
     screenplay = Screenplay.query.all()
+    # .order_by(Screenplay.screenplay_id.desc())
     return render_template('index.html', title='Home', screenplay=screenplay)
 
 
