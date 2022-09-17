@@ -3,10 +3,11 @@
 {% block content %}
 
 
-<div class="container d-flex w-100">
-    <div class="col">
+<div class="container d-flex">
+    <div class="col w-50">
+
         <!-- Screenplay Welcome Dashboard -->
-        <div class="p-3 mb-3" style="width: 36rem; background-color: rgb(209, 249, 214);">
+        <div class="p-3 mb-3" style="background-color: rgb(209, 249, 214);">
             <h1>Welcome to Screenplay, 
                 <b>
                     <a href="{{ url_for('user', username=current_user.username) }}">
@@ -34,13 +35,14 @@
             {% endfor %}
         </div>
     </div>
-    <div class="col">
-        <div class="my-3" style="width: 24rem;">
+
+    <div class="col w-50">
+        <div class="my-3">
             <a href="{{ url_for('create_screenplay') }}" class="btn btn-warning btn-lg mb-3" role="button">+ <b>New Screenplay</b> +</a>
         </div>
 
         <!-- Screenplay notices -->
-        <div class="card mb-3 border-primary" style="width: 36rem;">
+        <div class="card mb-3 border-primary">
             <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
             <div class="card-header bg-primary text-white">
                 Announcement
@@ -51,7 +53,8 @@
                 <a href="#" class="btn btn-primary">Try it!</a>
             </div>
         </div>
-        <div class="card mb-3 border-success" style="width: 36rem;">
+
+        <div class="card mb-3 border-success">
             <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
             <div class="card-header bg-success text-white justify-content-between">
                 <div>
@@ -59,8 +62,8 @@
                 </div>
             </div>
             <div class="card-body" style="background-color: rgb(209, 249, 214);">
-                <!-- <h5 class="card-title">Screenplay 1.0 is coming out Fall 2022.</h5> -->
-                <p class="card-text">At left, you can check out the descriptions of screenplays other users are working on.</p>
+                <h5 class="card-title">At left, you can check out the descriptions of screenplays other users are working on.</h5>
+                <!-- <p class="card-text">At left, you can check out the descriptions of screenplays other users are working on.</p> -->
                 <!-- <a href="#" class="btn btn-primary">Try it!</a> -->
             </div>
         </div>

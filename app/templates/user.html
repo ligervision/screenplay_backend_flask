@@ -4,8 +4,10 @@
 
 
 <div class="container d-flex w-100">
-    <div class="col">
-        <div class="p-3 mb-3" style="width: 36rem; background-color: rgb(209, 249, 214);">
+    <div class="col w-50">
+
+        <!-- User Profile Dashboard -->
+        <div class="p-3 mb-3" style="background-color: rgb(209, 249, 214);">
 
             <h5>USER PROFILE:</h5>
             <h1>
@@ -64,8 +66,8 @@
             {% endfor %}
         </div>
     </div>
-    <div class="col">
-        <div class="my-3" style="width: 24rem;">
+    <div class="col w-50">
+        <div class="my-3">
             <a href="{{ url_for('create_screenplay') }}" class="btn btn-warning btn-lg mb-3" role="button">+ <b>New Screenplay</b> +</a>
         </div>
     </div>
