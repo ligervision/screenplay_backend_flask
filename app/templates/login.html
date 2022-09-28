@@ -5,6 +5,11 @@
 <!-- main overall flex container -->
 <div class="d-flex p-4 flex-column justify-content-center align-items-center mb-3">
 
+    <!-- BIG LOGO -->
+    <a href="{{ url_for('index') }}">
+        <image src="{{url_for('static',filename = 'screenplay_logo_web.gif')}}" width="324"></image>
+    </a>
+
     <h1>Log In</h1>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
